@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sajid Jamal — Portfolio</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --fg:#e9edf6;
+      --muted:#9aa4bf;
+      --card:#121933cc; /* glass */
+      --card-border:#2a3355;
+      --brand:#6ee7ff;
+      --brand-2:#7c5cff;
+      --accent:#20e3b2;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    /* Light mode (auto if system is light) */
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8ff;
+        --fg:#0c1022;
+        --muted:#596180;
+        --card:#ffffffcc;
+        --card-border:#e6e9f4;
+        --brand:#2563eb;
+        --brand-2:#8b5cf6;
+        --accent:#10b981;
+      }
+      .hero::before{opacity:.7;}
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--fg);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(32,227,178,.25), transparent 60%),
+                  radial-gradient(1000px 600px at 110% 10%, rgba(124,92,246,.25), transparent 55%),
+                  radial-gradient(1200px 700px at 50% 110%, rgba(110,231,255,.18), transparent 55%),
+                  var(--bg);
+    }
+
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:12px 0;
+    }
+    .logo{
+      font-weight:800; letter-spacing:.2px; display:flex; align-items:center; gap:10px;
+    }
+    .logo .dot{width:12px;height:12px;border-radius:50%;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 25px rgba(124,92,246,.5);
+    }
+    .nav a{
+      color:var(--fg); text-decoration:none; font-weight:600; opacity:.9;
+      padding:8px 12px; border-radius:10px;
+    }
+    .nav a:hover{background:rgba(255,255,255,.08)}
+
+    /* HERO */
+    .hero{
+      position:relative; margin-top:24px; border-radius:var(--radius);
+      background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--card-border);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:-2px;
+      background: conic-gradient(from 180deg at 50% 50%, var(--brand), var(--brand-2), var(--accent), var(--brand));
+      filter: blur(40px); opacity:.35; pointer-events:none;
+    }
+    .hero-inner{position:relative; padding:48px 36px; display:grid; gap:20px}
+    @media (min-width:900px){ .hero-inner{grid-template-columns:2fr 1.2fr; align-items:center; padding:64px;} }
+
+    .eyebrow{
+      display:inline-flex; gap:10px; align-items:center; font-size:.9rem;
+      padding:6px 10px; border-radius:999px;
+      background:rgba(255,255,255,.08); border:1px solid var(--card-border);
+      backdrop-filter: blur(6px);
+    }
+    .gradient{
+      background: linear-gradient(90deg,var(--brand),var(--brand-2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    h1{font-size:clamp(28px,4vw,46px); line-height:1.1; margin:8px 0 0}
+    p.lead{color:var(--muted); font-size:clamp(15px,2vw,18px); margin:10px 0 0; max-width:60ch}
+
+    .buttons{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      border:1px solid var(--card-border); background:rgba(255,255,255,.08);
+      padding:10px 14px; border-radius:14px; text-decoration:none; color:var(--fg); font-weight:600;
+      transition:transform .15s ease, background .15s ease; display:inline-flex; gap:8px; align-items:center;
+      backdrop-filter: blur(6px);
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      border:0; color:white; box-shadow:0 10px 25px rgba(124,92,246,.35);
+    }
+    .btn:hover{transform:translateY(-1.5px)}
+
+    .avatar{
+      width:160px; height:160px; border-radius:22px; overflow:hidden; border:1px solid var(--card-border);
+      background:linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      box-shadow:var(--shadow); margin:auto;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+
+    /* SECTIONS */
+    .section{margin-top:32px; display:grid; gap:18px}
+    .cards{display:grid; gap:16px}
+    @media (min-width:800px){ .cards{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius);
+      padding:18px; backdrop-filter: blur(10px); box-shadow:var(--shadow); position:relative;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .card:hover{transform: translateY(-4px); border-color: rgba(124,92,246,.6)}
+    .card h3{margin:0 0 6px}
+    .meta{color:var(--muted); font-size:.9rem}
+
+    .tagset{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tag{
+      font-size:.78rem; padding:6px 10px; border-radius:999px;
+      border:1px dashed var(--card-border); color:var(--muted);
+      background:rgba(255,255,255,.05)
+    }
+
+    footer{margin:40px 0 20px; text-align:center; color:var(--muted); font-size:.9rem}
+
+    /* Subtle reveal on scroll */
+    .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.show{opacity:1; transform:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="logo"><span class="dot"></span> Sajid Jamal</div>
+      <div>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <span class="eyebrow">Computer science student • Cyber Security</span>
+          <h1>Hi, I’m <span class="gradient">Sajid Jamal</span>.</h1>
+          <p class="lead">
+            I’m a passionate BCA student exploring <strong>Cyber Security</strong>, Python, and systems.
+            I enjoy building real projects and documenting my learning journey.
+          </p>
+          <div class="buttons">
+            <a class="btn primary" href="#projects">See my work →</a>
+            <a class="btn" href="mailto:sajidjamal212@gmail.com">Email me</a>
+            <a class="btn" href="https://github.com/Lone-sajid12" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <div class="avatar">
+          <!-- Replace with your photo (square works best) -->
+          <img src="https://i.ibb.co/dstVrr48/myphoto-jpg.jpg" alt="Sajid jamal" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section reveal">
+      <h2>Projects</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Student Record Manager</h3>
+          <p class="meta">C • Console app • CRUD</p>
+          <p>A clean CLI program to add, search, update, and delete student records with file storage.</p>
+          <div class="tagset">
+            <span class="tag">C</span><span class="tag">File I/O</span><span class="tag">Data structures</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Password Strength Analyzer</h3>
+          <p class="meta">Python • Security</p>
+          <p>Checks entropy, common patterns, and gives actionable tips to build stronger passwords.</p>
+          <div class="tagset">
+            <span class="tag">Python</span><span class="tag">Regex</span><span class="tag">CLI</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Portfolio Website</h3>
+          <p class="meta">HTML • CSS • JS</p>
+          <p>This site! Built as a fast, static page and deployed on GitHub Pages.</p>
+          <div class="tagset">
+            <span class="tag">Responsive</span><span class="tag">Accessibility</span><span class="tag">Performance</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section reveal">
+      <h2>Skills</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Languages</h3>
+          <p class="meta">C, Python, HTML, CSS, JavaScript (basics)</p>
+          <div class="tagset"><span class="tag">C</span><span class="tag">Python</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+        </div>
+        <div class="card">
+          <h3>Security & Tools</h3>
+          <p class="meta">Linux, Git/GitHub, OWASP Top 10 (learning)</p>
+          <div class="tagset"><span class="tag">Linux</span><span class="tag">Git</span><span class="tag">OWASP</span><span class="tag">Bash</span></div>
+        </div>
+        <div class="card">
+          <h3>Interests</h3>
+          <p class="meta">CTFs, cryptography, system design, CLI apps</p>
+          <div class="tagset"><span class="tag">CTF</span><span class="tag">Crypto</span><span class="tag">Systems</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <h2>Contat</h2>
+      <div class="card">
+        <p>Want to collaborate or say hi? I’m open to internships and project work.</p>
+        <div class="buttons">
+          <a class="btn primary" href="mailto:sajidjamal212@gmail.com">sajidjamal212@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/sajid-jamal-130462380" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Sajid Jamal • Built with HTML/CSS </footer>
+  </div>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // simple reveal on scroll
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+    }, {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
