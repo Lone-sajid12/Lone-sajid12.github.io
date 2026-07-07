@@ -18,4 +18,4 @@ A productivity dashboard with task management, analytics, XP system, weekly revi
 
 ## 📫 Connect with Me
 - 💼 LinkedIn: https://www.linkedin.com/in/sajid-jamal-130462380/
-- 🌐 Portfolio:Lone-sajid12.github.io
+- 🌐 Portfolio:https://lone-sajid12.github.io/
